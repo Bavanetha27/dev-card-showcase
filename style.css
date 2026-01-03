@@ -1,27 +1,52 @@
 /* =========================================
+   THEME VARIABLES
+   ========================================= */
+
+/* Dark Theme (Default) */
+:root {
+  --bg-color: #0f172a;
+  --text-color: #ffffff;
+  --secondary-text: #94a3b8;
+  --card-bg: #1e293b;
+  --border-color: #334155;
+  --primary-color: #38bdf8;
+}
+
+/* Light Theme */
+body.light-mode {
+  --bg-color: #f8fafc;
+  --text-color: #0f172a;
+  --secondary-text: #475569;
+  --card-bg: #ffffff;
+  --border-color: #e2e8f0;
+  --primary-color: #0284c7;
+}
+
+
+/* =========================================
    GLOBAL STYLES
    ========================================= */
 body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #0f172a;
-    /* Deep Navy Background */
-    color: white;
-    margin: 0;
-    padding: 20px;
-    text-align: center;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  margin: 0;
+  padding: 20px;
+  text-align: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
 }
 
 h1 {
-    margin-bottom: 10px;
-    font-size: 2.5rem;
-    color: #38bdf8;
-    /* Light Blue */
+  margin-bottom: 10px;
+  font-size: 2.5rem;
+  color: var(--primary-color);
 }
 
 .subtitle {
-    color: #94a3b8;
-    margin-bottom: 50px;
+  color: var(--secondary-text);
+  margin-bottom: 50px;
 }
+
 
 /* =========================================
    GRID LAYOUT (Responsive)
@@ -40,19 +65,14 @@ h1 {
    CARD DESIGN
    ========================================= */
 .card {
-    background: #1e293b;
-    border-radius: 18px;
-    padding: 28px 24px;
-    text-align: center;
-
-    border: 1px solid #334155;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center; /* Centers content horizontally */
-
-    transition: transform 0.25s ease, box-shadow 0.25s ease;
-
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 18px;
+  padding: 28px 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
 }
 
 .card:hover {
@@ -111,35 +131,24 @@ h1 {
 }
 
 .card-btn {
+  margin-top: auto;
+  padding: 10px 25px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  text-decoration: none;
 
-    font-weight: 600;
-    margin-top: auto;
-    /* Pushes button to bottom */
-    padding: 10px 25px;
-    background-color: transparent;
-    border: 2px solid #38bdf8;
-    text-decoration: none;
+  color: var(--primary-color);
+  border: 1px solid rgba(56, 189, 248, 0.35);
+  background: transparent;
+  border-radius: 8px;
 
-    color: #38bdf8;
-    background: transparent;
-
-    border: 1px solid rgba(56, 189, 248, 0.35);
-    border-radius: 8px;
-
-    transition:
-        background 0.2s ease,
-        border-color 0.2s ease,
-        transform 0.15s ease;
+  transition: background 0.2s ease, transform 0.15s ease;
 }
 
 .card-btn:hover {
-    background: rgba(56, 189, 248, 0.12);
-    border-color: #38bdf8;
-    transform: translateY(-1px);
+  background: rgba(56, 189, 248, 0.12);
+  transform: translateY(-1px);
 }
-
-
-
 
 
 /* =========================================
@@ -366,6 +375,7 @@ h1 {
 }
 
 /* 🔍 Glassy Search Bar */
+/* 🔍 Glassy Search Bar (Theme Aware) */
 #searchInput {
     padding: 14px 18px;
     width: 340px;
@@ -373,15 +383,15 @@ h1 {
     margin: 30px auto;
     display: block;
 
-    font-size: 16px;
-    color: #fff;
+  font-size: 16px;
+  color: var(--text-color);
 
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(12px);
     -webkit-backdrop-filter: blur(12px);
 
-    border: 1px solid rgba(255, 255, 255, 0.25);
-    border-radius: 30px;
+  border: 1px solid var(--border-color);
+  border-radius: 30px;
 
     outline: none;
     box-shadow: 0 8px 32px rgba(31, 38, 135, 0.25);
@@ -389,10 +399,19 @@ h1 {
     transition: all 0.3s ease;
 }
 
+
 /* Placeholder */
 #searchInput::placeholder {
-    color: rgba(255, 255, 255, 0.7);
+  color: var(--secondary-text);
 }
+
+
+#searchInput:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 10px 40px rgba(79, 70, 229, 0.35);
+  background: rgba(255, 255, 255, 0.25);
+}
+
 
 /* Focus effect */
 #searchInput:focus {
@@ -425,7 +444,38 @@ h1 {
         border-color: transparent;
     }
 }
-
+/* Slow Typewriter Effect */
 #typewriter {
+    border-right: 3px solid #38bdf8;
+    white-space: nowrap;
+    overflow: hidden;
+    display: inline-block;
+    letter-spacing: 2px;
+    font-weight: bold;
     animation: blink 0.75s step-end infinite;
 }
+
+/* Blink cursor */
+@keyframes blink {
+    50% {
+        border-color: transparent;
+    }
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+    background: transparent;
+    border: 2px solid var(--primary-color);
+    color: var(--primary-color);
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background-color: var(--primary-color);
+    color: var(--bg-color);
+}
+
