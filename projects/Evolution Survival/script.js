@@ -90,7 +90,6 @@ function toggle(btn,condition,msg){
 function tryEvolve(){
   const r=stages[stageIndex].r;
 
-  console.log("food:",food,health,intel);
   if(food < r.food || health < r.health || intel < r.intel){
     logMsg("❌ Evolution failed: exact balance required.");
     return;
